@@ -4,11 +4,15 @@ Dog vs Cat Classifier API.
 Run: uvicorn app.main:app --host 0.0.0.0 --port 8000
 
 Endpoints: GET /health, GET /model-info, POST /predict, POST /explainability, POST /validate
+
+Deploy: Set MODEL_URL (e.g. GitHub Release raw URL) to download best_model.pth if missing.
 """
 import base64
 import io
 import logging
+import os
 from pathlib import Path
+from urllib.request import urlretrieve
 
 import torch
 import yaml
@@ -59,6 +63,17 @@ async def startup_event():
         logger.info("Initializing with device: %s", device)
 
         model_path = Path("models/checkpoints/best_model.pth")
+        model_url = os.environ.get("MODEL_URL")
+        if model_url and not model_path.exists():
+            model_path.parent.mkdir(parents=True, exist_ok=True)
+            try:
+                logger.info("Downloading model from MODEL_URL...")
+                urlretrieve(model_url, model_path)
+                logger.info("Model downloaded to %s", model_path)
+            except Exception as e:
+                logger.error("Model download failed: %s", e)
+                model_path = Path("models/checkpoints/best_model.pth")
+
         if model_path.exists():
             from app.model_loader import InferenceEngine
 

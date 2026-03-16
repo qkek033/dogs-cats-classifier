@@ -1,0 +1,25 @@
+# Git and env
+.git
+.gitignore
+venv
+.venv
+env
+__pycache__
+*.pyc
+.pytest_cache
+.coverage
+htmlcov
+
+# Data and large artifacts (model downloaded via MODEL_URL on deploy)
+data/
+models/
+mlruns/
+logs/
+*.log
+
+# IDE and OS
+.idea
+.vscode
+.DS_Store
+*.md
+!README.md

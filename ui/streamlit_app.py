@@ -19,7 +19,9 @@ st.set_page_config(
 
 logger = logging.getLogger(__name__)
 
-DEFAULT_API_URL = os.environ.get("API_URL", "http://127.0.0.1:8000")
+# Deployed API base URL (no trailing slash). All requests use this + path (/predict, /explainability, /health, etc.).
+API_BASE_URL = "https://dogs-cats-classifier.onrender.com"
+DEFAULT_API_URL = os.environ.get("API_URL", API_BASE_URL)
 API_TIMEOUT_SECONDS = 30
 
 st.markdown("""
@@ -157,7 +159,7 @@ def main():
         api_url = st.text_input(
             "Backend API URL",
             value=DEFAULT_API_URL,
-            help="FastAPI server URL (e.g. http://127.0.0.1:8000)",
+            help="FastAPI server base URL (e.g. https://dogs-cats-classifier.onrender.com)",
         )
         st.caption("Changes apply after switching tabs.")
 

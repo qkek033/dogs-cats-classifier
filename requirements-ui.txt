@@ -1,0 +1,6 @@
+# Streamlit UI only (for Streamlit Community Cloud / lightweight deploy)
+# API calls backend; no PyTorch needed in UI.
+streamlit>=1.28.0
+requests>=2.31.0
+Pillow>=10.0.0
+numpy>=1.24.0

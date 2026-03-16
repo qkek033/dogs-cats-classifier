@@ -5,6 +5,9 @@ __pycache__/
 *.pyo
 *.pyd
 .Python
+*.pt
+*.onnx
+.ipynb_checkpoints/
 
 # Virtual environments
 venv/
