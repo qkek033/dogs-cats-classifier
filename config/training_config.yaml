@@ -1,0 +1,45 @@
+# 훈련 설정
+training:
+  epochs: 30
+  batch_size: 64
+  learning_rate: 0.0003
+  weight_decay: 0.0001
+  warmup_epochs: 5
+  
+# 옵티마이저
+optimizer:
+  name: AdamW
+  betas: [0.9, 0.999]
+  
+# 스케줄러
+scheduler:
+  name: cosine  # cosine, step, exponential
+  t_max: 30
+  eta_min: 1e-6
+  
+# 데이터 증강
+augmentation:
+  random_flip: 0.5
+  rotation: 15
+  color_jitter_brightness: 0.2
+  color_jitter_contrast: 0.2
+  color_jitter_saturation: 0.2
+  color_jitter_hue: 0.1
+  perspective: 0.2
+  
+# 조기 종료
+early_stopping:
+  enabled: true
+  patience: 5
+  min_delta: 0.001
+  
+# MLflow 설정
+mlflow:
+  experiment_name: dogcat_classifier
+  backend_store_uri: ./mlruns
+  
+# 체크포인트
+checkpoint:
+  save_best_only: true
+  save_frequency: 1
+  model_dir: models/checkpoints

@@ -1,0 +1,63 @@
+# Byte-compiled / cached
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+.Python
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Environment and secrets
+.env
+.env.local
+*.env
+
+# Logs and temp
+logs/
+*.log
+train_log.txt
+structure.txt
+*.tmp
+*.temp
+*.swp
+*.swo
+
+# Zip and archives
+*.zip
+*.tar
+*.tar.gz
+*.rar
+
+# Model artifacts (large files)
+models/*.pth
+models/checkpoints/*.pth
+models/centroids.npz
+
+# Data (large datasets)
+data/
+data/raw/
+data/processed/
+
+# IDE and OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# MLflow
+mlruns/
+
+# pytest
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Distribution
+build/
+dist/
+*.egg-info/
+*.egg

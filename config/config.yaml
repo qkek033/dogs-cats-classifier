@@ -1,0 +1,45 @@
+# 일반 설정
+project:
+  name: dogcat_classifier
+  version: 1.0.0
+  description: Production-ready Dog vs Cat classifier
+
+# 데이터 설정
+data:
+  raw_path: data/raw
+  processed_path: data/processed
+  train_test_split: 0.8
+  validation_split: 0.2
+  seed: 42
+
+# 모델 설정
+model:
+  # 사용 가능: resnet18, efficientnet_b0, convnext_tiny
+  backbone: efficientnet_b0
+  num_classes: 2
+  pretrained: true
+  dropout_rate: 0.5
+
+# 추론 설정
+inference:
+  device: cuda  # cuda 또는 cpu
+  batch_size: 32
+  # 신뢰도가 이 값 미만이면 unknown 반환 (landscape, random object 등 거부)
+  confidence_threshold: 0.75
+  entropy_threshold: 0.5
+  # OOD: min(거리) > threshold 이면 unknown. (cosine distance 사용 시 대략 0.3~0.8)
+  ood_distance_threshold: 0.5
+  centroids_path: models/centroids.npz
+  
+# 최적화 설정
+optimization:
+  formats: [pytorch, torchscript, onnx]
+  quantize: false
+  half_precision: true
+
+# 로깅
+logging:
+  level: INFO
+  log_dir: logs
+  inference_log: inference.log
+  error_log: errors.log
