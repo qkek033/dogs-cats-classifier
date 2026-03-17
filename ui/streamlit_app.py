@@ -1,6 +1,13 @@
 """
 Streamlit UI for Dog vs Cat Classifier.
-Run from project root: streamlit run ui/streamlit_app.py
+
+Local run (from project root):
+  Step 1: Run FastAPI
+    uvicorn app.main:app --reload
+  Step 2: Run Streamlit (new terminal)
+    streamlit run ui/streamlit_app.py
+
+API: http://localhost:8000  |  UI: http://localhost:8501
 """
 import base64
 import io
@@ -19,8 +26,9 @@ st.set_page_config(
 
 logger = logging.getLogger(__name__)
 
-# Deployed API base URL (no trailing slash). All requests use this + path (/predict, /explainability, /health, etc.).
-API_BASE_URL = "https://dogs-cats-classifier.onrender.com"
+# API base URL (no trailing slash). All requests use this + path (/predict, /explainability, /health, etc.).
+# Local default; override with API_URL env var for deployment (e.g. https://xxx.onrender.com).
+API_BASE_URL = "http://localhost:8000"
 DEFAULT_API_URL = os.environ.get("API_URL", API_BASE_URL)
 API_TIMEOUT_SECONDS = 30
 
@@ -159,7 +167,7 @@ def main():
         api_url = st.text_input(
             "Backend API URL",
             value=DEFAULT_API_URL,
-            help="FastAPI server base URL (e.g. https://dogs-cats-classifier.onrender.com)",
+            help="FastAPI server base URL (local: http://localhost:8000)",
         )
         st.caption("Changes apply after switching tabs.")
 
